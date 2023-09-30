@@ -1,18 +1,52 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+const path = require('path');
+
 module.exports = {
-  root: true,
-  env: { browser: true, es2020: true },
   extends: [
     'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
+    'plugin:react/recommended',
     'plugin:react-hooks/recommended',
+    'plugin:import/recommended',
+    'plugin:import/typescript',
+    'plugin:jsx-a11y/recommended',
+    'plugin:@typescript-eslint/recommended',
+    // disable rules that conflict prettier
+    'eslint-config-prettier',
+    'prettier'
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs'],
-  parser: '@typescript-eslint/parser',
-  plugins: ['react-refresh'],
-  rules: {
-    'react-refresh/only-export-components': [
-      'warn',
-      { allowConstantExport: true },
-    ],
+  plugins: ['prettier'],
+  settings: {
+    react: {
+      version: 'detect'
+    },
+    'import/resolver': {
+      node: {
+        paths: [path.resolve(__dirname, '')],
+        extensions: ['.js', '.jsx', '.ts', '.tsx']
+      }
+    }
   },
-}
+  env: {
+    node: true
+  },
+  rules: {
+    // disable rule requiring import React in .jsx
+    'react/react-in-jsx-scope': 'off',
+    // warning when <a target='_blank'> tag without rel="noreferrer"
+    'react/jsx-no-target-blank': 'warn',
+    'prettier/prettier': [
+      'warn',
+      {
+        arrowParens: 'always',
+        semi: true,
+        trailingComma: 'none',
+        tabWidth: 2,
+        endOfLine: 'auto',
+        useTabs: false,
+        singleQuote: true,
+        printWidth: 120,
+        jsxSingleQuote: true
+      }
+    ]
+  }
+};
