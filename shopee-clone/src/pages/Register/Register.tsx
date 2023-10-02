@@ -2,6 +2,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormValues, inputSchema } from 'src/utils/inputSchema';
+import { useMutateUserRegister } from 'src/hooks/useMutateUserRegister';
 
 import Input from 'src/components/Input/Input';
 
@@ -15,11 +16,17 @@ const Register = () => {
     resolver: yupResolver(inputSchema)
   });
 
+  const {
+    mutate: mutateUser,
+    isError: isMutateUserRegisterError,
+    error: mutateUserRegisterError
+  } = useMutateUserRegister();
+
   const onSubmitHandler: SubmitHandler<FormValues> = (data) => {
-    console.log({ data });
+    mutateUser({ email: data.email, password: data.password });
     reset();
   };
-  console.log(errors);
+
   return (
     <div className='bg-orange'>
       <title>Register | Shopee Clone</title>
@@ -77,6 +84,16 @@ const Register = () => {
           </div>
         </div>
       </div>
+
+      {isMutateUserRegisterError && (
+        <div>
+          <p>Something went wrong! Please try again later</p>
+          <p>
+            Error:
+            {mutateUserRegisterError instanceof Error ? mutateUserRegisterError.message : 'Unknown error happened'}
+          </p>
+        </div>
+      )}
     </div>
   );
 };
