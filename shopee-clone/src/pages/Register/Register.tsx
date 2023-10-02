@@ -1,8 +1,8 @@
-import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormValues, inputSchema } from 'src/utils/inputSchema';
+
 import Input from 'src/components/Input/Input';
 
 const Register = () => {
