@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom';
 import Popover from '../Popover/Popover';
+import Navbar from '../Navbar/Navbar';
 
 const Header = () => {
   return (
     <div className='bg-[linear-gradient(-180deg,#f53d2d,#f63)] pb-5 pt-2 text-white'>
       <div className='container'>
+        <Navbar />
         <div className='mt-4 grid grid-cols-12 items-end gap-4'>
           <Link to='/' className='col-span-2'>
             <svg viewBox='0 0 192 65' className='h-11 w-full fill-white'>
