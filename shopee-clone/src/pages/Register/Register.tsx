@@ -20,11 +20,7 @@ const Register = () => {
     resolver: yupResolver(inputSchema)
   });
 
-  const {
-    mutate: mutateUser,
-    isError: isMutateUserRegisterError,
-    error: mutateUserRegisterError
-  } = useMutateUserRegister();
+  const { mutate: mutateUser, error: mutateUserRegisterError } = useMutateUserRegister();
 
   const onSubmitHandler: SubmitHandler<FormValues> = (data) => {
     mutateUser({ email: data.email, password: data.password });
@@ -65,7 +61,6 @@ const Register = () => {
                 autoComplete='on'
                 errorMessage={errors.email?.message}
               />
-
               <Input
                 register={register}
                 name='password'

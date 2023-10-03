@@ -1,12 +1,9 @@
 import React from 'react';
-import { UseFormRegister } from 'react-hook-form';
-import { FormValues } from 'src/utils/inputSchema';
+import { FieldPath, FieldValues, UseFormRegister } from 'react-hook-form';
 
-type InputName = 'email' | 'password' | 'confirm_password';
-
-type Props = {
-  register: UseFormRegister<FormValues>;
-  name: InputName;
+type Props<TFieldValues extends FieldValues> = {
+  register: UseFormRegister<TFieldValues>;
+  name: FieldPath<TFieldValues>;
   errorMessage?: string;
   type: React.HTMLInputTypeAttribute;
   className: string;
@@ -16,7 +13,7 @@ type Props = {
   classNameError?: string;
 };
 
-const Input = ({
+const Input = <TFieldValues extends FieldValues = FieldValues>({
   register,
   name,
   errorMessage,
@@ -26,7 +23,7 @@ const Input = ({
   autoComplete,
   classNameInput = 'p-3 w-full outline-none border border-gray-300 focus:border-gray-500 rounded-sm focus:shadow-sm',
   classNameError = 'mt-1 text-red-600 min-h-[1.25rem] text-sm'
-}: Props) => {
+}: Props<TFieldValues>) => {
   return (
     <div className={className}>
       <input
