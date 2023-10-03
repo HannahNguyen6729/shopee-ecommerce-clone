@@ -18,7 +18,7 @@ const Footer = () => {
         <div className='mt-10 text-center text-sm'>
           <div>Công ty TNHH Shopee</div>
           <div className='mt-6'>
-            Adress: 4th floor, Capital Place Building, 29 Bukit Street, Tengah City, Phone: 19001221 - Email:
+            Address: 4th floor, Capital Place Building, 29 Bukit Street, Tengah City, Phone: 19001221 - Email:
             customer@support.shopee.vn
           </div>
           <div className='mt-2'>Business code: 0106773786</div>

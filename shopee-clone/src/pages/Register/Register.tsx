@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormValues, inputSchema } from 'src/utils/inputSchema';
 import { useMutateUserRegister } from 'src/hooks/useMutateUserRegister';
+import { isAxiosUnprocessableEntityError } from 'src/utils/axiosError';
+import { ResponseApi } from 'src/types/util.type';
+import { useEffect } from 'react';
 
 import Input from 'src/components/Input/Input';
 
@@ -11,7 +14,8 @@ const Register = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset
+    reset,
+    setError
   } = useForm<FormValues>({
     resolver: yupResolver(inputSchema)
   });
@@ -26,6 +30,21 @@ const Register = () => {
     mutateUser({ email: data.email, password: data.password });
     reset();
   };
+
+  useEffect(() => {
+    if (isAxiosUnprocessableEntityError<ResponseApi<Omit<FormValues, 'confirm_password'>>>(mutateUserRegisterError)) {
+      const formError = mutateUserRegisterError.response?.data.data;
+
+      if (formError) {
+        Object.keys(formError).forEach((property) => {
+          setError(property as keyof Omit<FormValues, 'confirm_password'>, {
+            type: 'Server error',
+            message: formError[property as keyof Omit<FormValues, 'confirm_password'>]
+          });
+        });
+      }
+    }
+  }, [mutateUserRegisterError, setError]);
 
   return (
     <div className='bg-orange'>
@@ -84,16 +103,6 @@ const Register = () => {
           </div>
         </div>
       </div>
-
-      {isMutateUserRegisterError && (
-        <div>
-          <p>Something went wrong! Please try again later</p>
-          <p>
-            Error:
-            {mutateUserRegisterError instanceof Error ? mutateUserRegisterError.message : 'Unknown error happened'}
-          </p>
-        </div>
-      )}
     </div>
   );
 };
