@@ -1,4 +1,3 @@
-import React from 'react';
 import Footer from 'src/components/Footer/Footer';
 import RegisterHeader from 'src/components/RegisterHeader/RegisterHeader';
 
