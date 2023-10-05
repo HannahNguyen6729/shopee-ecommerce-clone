@@ -1,4 +1,5 @@
 import { UseMutateFunction, useMutation } from '@tanstack/react-query';
+import { path } from '../constants/path';
 import { AuthResponse } from 'src/types/auth.type';
 import { http } from 'src/utils/http';
 
@@ -18,7 +19,7 @@ type UserRegisterResponse = {
 export const useMutateUserRegister = (): UserRegisterResponse => {
   const { mutate, isLoading, isError, error, data } = useMutation<AuthResponse, Error, UserRegisterParams>({
     mutationFn: async (userInfo: UserRegisterParams) => {
-      const res = await http.post('/register', userInfo);
+      const res = await http.post(path.register, userInfo);
       return res.data;
     },
     onSuccess: (response) => {

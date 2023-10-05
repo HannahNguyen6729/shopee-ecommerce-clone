@@ -1,4 +1,5 @@
 import { UseMutateFunction, useMutation } from '@tanstack/react-query';
+import { path } from '../constants/path';
 import { AuthResponse } from 'src/types/auth.type';
 import { http } from 'src/utils/http';
 
@@ -18,7 +19,7 @@ type UserLoginResponse = {
 export const useMutateUserLogin = (): UserLoginResponse => {
   const { mutate, isLoading, isError, error, data } = useMutation<AuthResponse, Error, UserLoginParams>({
     mutationFn: async (userInfo: UserLoginParams) => {
-      const res = await http.post('/login', userInfo);
+      const res = await http.post(path.login, userInfo);
 
       return res.data;
     },

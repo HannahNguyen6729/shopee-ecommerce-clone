@@ -2,6 +2,7 @@ import axios, { AxiosError, AxiosInstance, HttpStatusCode } from 'axios';
 import { toast } from 'react-toastify';
 import { clearLocalStorage, getAccessTokenFromLS, setAccessTokenToLS } from './getTokenfromLS';
 import { AuthResponse } from 'src/types/auth.type';
+import { path } from '../constants/path';
 
 export const http: AxiosInstance = axios.create({
   baseURL: 'https://api-ecom.duthanhduoc.com/',
@@ -15,12 +16,12 @@ http.interceptors.response.use(
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
     const url = response.config.url;
-    if (url === '/login' || url === '/register') {
+    if (url === path.login || url === path.register) {
       const access_token = (response.data as AuthResponse).data.access_token;
       if (access_token) {
         setAccessTokenToLS(access_token);
       }
-    } else if (url === '/logout') {
+    } else if (url === path.logout) {
       clearLocalStorage();
     }
 

@@ -7,8 +7,9 @@ import { isAxiosUnprocessableEntityError } from 'src/utils/axiosError';
 import { ErrorResponseApi } from 'src/types/util.type';
 import { useContext, useEffect } from 'react';
 import { AuthContext } from 'src/context/authContext';
-import Button from 'src/components/button/Button';
+import { path } from '../../constants/path';
 
+import Button from 'src/components/button/Button';
 import Input from 'src/components/Input/Input';
 
 const Register = () => {
@@ -50,7 +51,7 @@ const Register = () => {
 
     if (data?.data.user) {
       setIsAuthenticated(true);
-      navigate('/');
+      navigate(path.home);
     }
   }, [data?.data.user, mutateUserRegisterError, navigate, setError, setIsAuthenticated]);
 
@@ -104,7 +105,7 @@ const Register = () => {
               </div>
               <div className='mt-8 flex items-center justify-center'>
                 <span className='text-gray-400'>Already had an account?</span>
-                <Link className='ml-1 text-red-400' to='/register'>
+                <Link className='ml-1 text-red-400' to={path.register}>
                   Login
                 </Link>
               </div>
