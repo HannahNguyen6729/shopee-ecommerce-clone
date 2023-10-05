@@ -1,11 +1,12 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useMutateUserLogin } from 'src/hooks/useMutateUserLogin';
 import { LoginFormValues, loginInputSchema } from 'src/utils/inputSchema';
 import { isAxiosUnprocessableEntityError } from 'src/utils/axiosError';
-import { ResponseApi } from 'src/types/util.type';
-import { useEffect } from 'react';
+import { ErrorResponseApi } from 'src/types/util.type';
+import { useContext, useEffect } from 'react';
+import { AuthContext } from 'src/context/authContext';
 
 import Input from 'src/components/Input/Input';
 
@@ -20,7 +21,9 @@ const Login = () => {
     resolver: yupResolver(loginInputSchema)
   });
 
-  const { mutate: mutateUser, error: mutateUserLoginError } = useMutateUserLogin();
+  const { mutate: mutateUser, error: mutateUserLoginError, data } = useMutateUserLogin();
+  const { setIsAuthenticated } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const onSubmitHandler: SubmitHandler<LoginFormValues> = (data) => {
     mutateUser({ email: data.email, password: data.password });
@@ -28,7 +31,7 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (isAxiosUnprocessableEntityError<ResponseApi<LoginFormValues>>(mutateUserLoginError)) {
+    if (isAxiosUnprocessableEntityError<ErrorResponseApi<LoginFormValues>>(mutateUserLoginError)) {
       const formError = mutateUserLoginError.response?.data.data;
 
       if (formError) {
@@ -40,7 +43,12 @@ const Login = () => {
         });
       }
     }
-  }, [mutateUserLoginError, setError]);
+
+    if (data?.data.user) {
+      setIsAuthenticated(true);
+      navigate('/');
+    }
+  }, [data?.data.user, mutateUserLoginError, navigate, setError, setIsAuthenticated]);
 
   return (
     <div className='bg-orange'>

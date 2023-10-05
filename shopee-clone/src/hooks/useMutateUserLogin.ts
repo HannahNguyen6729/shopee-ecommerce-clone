@@ -12,12 +12,14 @@ type UserLoginResponse = {
   error: unknown;
   isError: boolean;
   mutate: UseMutateFunction<AuthResponse, Error, UserLoginParams, unknown>;
+  data?: AuthResponse;
 };
 
 export const useMutateUserLogin = (): UserLoginResponse => {
-  const { mutate, isLoading, isError, error } = useMutation<AuthResponse, Error, UserLoginParams>({
+  const { mutate, isLoading, isError, error, data } = useMutation<AuthResponse, Error, UserLoginParams>({
     mutationFn: async (userInfo: UserLoginParams) => {
       const res = await http.post('/login', userInfo);
+
       return res.data;
     },
     onSuccess: (response) => {
@@ -27,5 +29,5 @@ export const useMutateUserLogin = (): UserLoginResponse => {
       console.log('error message ', err);
     }
   });
-  return { mutate, isLoading, isError, error };
+  return { mutate, isLoading, isError, error, data };
 };

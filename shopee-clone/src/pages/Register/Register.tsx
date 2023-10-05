@@ -4,7 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { FormValues, inputSchema } from 'src/utils/inputSchema';
 import { useMutateUserRegister } from 'src/hooks/useMutateUserRegister';
 import { isAxiosUnprocessableEntityError } from 'src/utils/axiosError';
-import { ResponseApi } from 'src/types/util.type';
+import { ErrorResponseApi } from 'src/types/util.type';
 import { useEffect } from 'react';
 
 import Input from 'src/components/Input/Input';
@@ -28,7 +28,9 @@ const Register = () => {
   };
 
   useEffect(() => {
-    if (isAxiosUnprocessableEntityError<ResponseApi<Omit<FormValues, 'confirm_password'>>>(mutateUserRegisterError)) {
+    if (
+      isAxiosUnprocessableEntityError<ErrorResponseApi<Omit<FormValues, 'confirm_password'>>>(mutateUserRegisterError)
+    ) {
       const formError = mutateUserRegisterError.response?.data.data;
 
       if (formError) {

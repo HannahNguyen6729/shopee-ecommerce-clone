@@ -5,10 +5,17 @@ import ProductList from './pages/ProductList/ProductList';
 import RegisterLayout from './layouts/RegisterLayout/RegisterLayout';
 import MainLayout from './layouts/MainLayout/MainLayout';
 import Profile from './pages/Profile/Profile';
+import { useContext } from 'react';
+import { AuthContext } from './context/authContext';
 
-const isAuthenticated = false;
-const ProtectedRoute = () => (isAuthenticated ? <Outlet /> : <Navigate to='/login' />);
-const RejectedRoute = () => (isAuthenticated ? <Navigate to='/' /> : <Outlet />);
+const ProtectedRoute = () => {
+  const { isAuthenticated } = useContext(AuthContext);
+  return isAuthenticated ? <Outlet /> : <Navigate to='/login' />;
+};
+const RejectedRoute = () => {
+  const { isAuthenticated } = useContext(AuthContext);
+  return isAuthenticated ? <Navigate to='/' /> : <Outlet />;
+};
 
 const useRouteElements = () => {
   const routeElement = useRoutes([
