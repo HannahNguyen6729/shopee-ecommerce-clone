@@ -7,7 +7,6 @@ interface Props {
 const RegisterLayout = ({ children }: Props) => {
   return (
     <div>
-      RegisterLayout
       <RegisterHeader />
       {children}
       <Footer />

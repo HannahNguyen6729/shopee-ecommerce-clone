@@ -1,7 +1,9 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useMatch } from 'react-router-dom';
 
-const RegisterHeadedr = () => {
+const RegisterHeader = () => {
+  const registerMatch = useMatch('/register');
+  const isRegister = Boolean(registerMatch);
+
   return (
     <header className='py-5'>
       <div className='container'>
@@ -13,11 +15,11 @@ const RegisterHeadedr = () => {
               </g>
             </svg>
           </Link>
-          <div className='ml-5 text-xl lg:text-2xl'> register</div>
+          <div className='ml-5 text-xl lg:text-2xl'> {isRegister ? 'Register' : 'Login'}</div>
         </nav>
       </div>
     </header>
   );
 };
 
-export default RegisterHeadedr;
+export default RegisterHeader;
