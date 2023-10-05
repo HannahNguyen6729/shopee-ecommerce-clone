@@ -7,6 +7,7 @@ import { isAxiosUnprocessableEntityError } from 'src/utils/axiosError';
 import { ErrorResponseApi } from 'src/types/util.type';
 import { useContext, useEffect } from 'react';
 import { AuthContext } from 'src/context/authContext';
+import Button from 'src/components/button/Button';
 
 import Input from 'src/components/Input/Input';
 
@@ -15,20 +16,20 @@ const Register = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
+    // reset,
     setError
   } = useForm<FormValues>({
     resolver: yupResolver(inputSchema)
   });
 
-  const { mutate: mutateUser, error: mutateUserRegisterError, data } = useMutateUserRegister();
+  const { mutate: mutateUser, error: mutateUserRegisterError, data, isLoading } = useMutateUserRegister();
 
   const { setIsAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const onSubmitHandler: SubmitHandler<FormValues> = (data) => {
     mutateUser({ email: data.email, password: data.password });
-    reset();
+    //reset();
   };
 
   useEffect(() => {
@@ -92,12 +93,14 @@ const Register = () => {
                 errorMessage={errors.confirm_password?.message}
               />
               <div className='mt-2'>
-                <button
+                <Button
+                  disabled={isLoading}
+                  isLoading={isLoading}
                   type='submit'
                   className='flex w-full items-center justify-center bg-red-500 py-4 px-2 text-sm uppercase text-white hover:bg-red-600'
                 >
                   Register
-                </button>
+                </Button>
               </div>
               <div className='mt-8 flex items-center justify-center'>
                 <span className='text-gray-400'>Already had an account?</span>

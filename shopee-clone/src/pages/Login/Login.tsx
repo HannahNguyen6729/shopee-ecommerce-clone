@@ -7,6 +7,7 @@ import { isAxiosUnprocessableEntityError } from 'src/utils/axiosError';
 import { ErrorResponseApi } from 'src/types/util.type';
 import { useContext, useEffect } from 'react';
 import { AuthContext } from 'src/context/authContext';
+import Button from 'src/components/button/Button';
 
 import Input from 'src/components/Input/Input';
 
@@ -15,19 +16,19 @@ const Login = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
+    //reset,
     setError
   } = useForm<LoginFormValues>({
     resolver: yupResolver(loginInputSchema)
   });
 
-  const { mutate: mutateUser, error: mutateUserLoginError, data } = useMutateUserLogin();
+  const { mutate: mutateUser, error: mutateUserLoginError, data, isLoading } = useMutateUserLogin();
   const { setIsAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const onSubmitHandler: SubmitHandler<LoginFormValues> = (data) => {
     mutateUser({ email: data.email, password: data.password });
-    reset();
+    //  reset();
   };
 
   useEffect(() => {
@@ -49,7 +50,7 @@ const Login = () => {
       navigate('/');
     }
   }, [data?.data.user, mutateUserLoginError, navigate, setError, setIsAuthenticated]);
-
+  console.log({ isLoading });
   return (
     <div className='bg-orange'>
       <title>Login | Shopee Clone</title>
@@ -79,12 +80,14 @@ const Login = () => {
                 errorMessage={errors.password?.message}
               />
               <div className='mt-3'>
-                <button
+                <Button
+                  disabled={isLoading}
+                  isLoading={isLoading}
                   type='submit'
                   className='flex  w-full items-center justify-center bg-red-500 py-4 px-2 text-sm uppercase text-white hover:bg-red-600'
                 >
                   Login
-                </button>
+                </Button>
               </div>
               <div className='mt-8 flex items-center justify-center'>
                 <span className='text-gray-400'>Register an account?</span>
