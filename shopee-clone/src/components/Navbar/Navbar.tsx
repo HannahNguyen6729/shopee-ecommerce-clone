@@ -94,11 +94,11 @@ export default function Navbar() {
       )}
       {!isAuthenticated && (
         <div className='flex items-center'>
-          <Link to='/' className='mx-3 capitalize text-white hover:text-white/70'>
+          <Link to='/register' className='mx-3 capitalize text-white hover:text-white/70'>
             Sign up
           </Link>
           <div className='h-4 border-r-[1px] border-r-white/40' />
-          <Link to='/' className='mx-3 capitalize  text-white hover:text-white/70'>
+          <Link to='/login' className='mx-3 capitalize  text-white hover:text-white/70'>
             Login
           </Link>
         </div>
