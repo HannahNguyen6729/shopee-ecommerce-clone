@@ -15,7 +15,7 @@ http.interceptors.response.use(
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
     const url = response.config.url;
-    if (url === '/login' || url === 'register') {
+    if (url === '/login' || url === '/register') {
       const access_token = (response.data as AuthResponse).data.access_token;
       if (access_token) {
         setAccessTokenToLS(access_token);

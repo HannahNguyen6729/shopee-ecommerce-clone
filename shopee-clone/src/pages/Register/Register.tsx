@@ -1,11 +1,12 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormValues, inputSchema } from 'src/utils/inputSchema';
 import { useMutateUserRegister } from 'src/hooks/useMutateUserRegister';
 import { isAxiosUnprocessableEntityError } from 'src/utils/axiosError';
 import { ErrorResponseApi } from 'src/types/util.type';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
+import { AuthContext } from 'src/context/authContext';
 
 import Input from 'src/components/Input/Input';
 
@@ -20,7 +21,10 @@ const Register = () => {
     resolver: yupResolver(inputSchema)
   });
 
-  const { mutate: mutateUser, error: mutateUserRegisterError } = useMutateUserRegister();
+  const { mutate: mutateUser, error: mutateUserRegisterError, data } = useMutateUserRegister();
+
+  const { setIsAuthenticated } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const onSubmitHandler: SubmitHandler<FormValues> = (data) => {
     mutateUser({ email: data.email, password: data.password });
@@ -42,7 +46,12 @@ const Register = () => {
         });
       }
     }
-  }, [mutateUserRegisterError, setError]);
+
+    if (data?.data.user) {
+      setIsAuthenticated(true);
+      navigate('/');
+    }
+  }, [data?.data.user, mutateUserRegisterError, navigate, setError, setIsAuthenticated]);
 
   return (
     <div className='bg-orange'>

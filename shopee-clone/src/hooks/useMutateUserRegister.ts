@@ -12,10 +12,11 @@ type UserRegisterResponse = {
   error: unknown;
   isError: boolean;
   mutate: UseMutateFunction<AuthResponse, Error, UserRegisterParams, unknown>;
+  data?: AuthResponse;
 };
 
 export const useMutateUserRegister = (): UserRegisterResponse => {
-  const { mutate, isLoading, isError, error } = useMutation<AuthResponse, Error, UserRegisterParams>({
+  const { mutate, isLoading, isError, error, data } = useMutation<AuthResponse, Error, UserRegisterParams>({
     mutationFn: async (userInfo: UserRegisterParams) => {
       const res = await http.post('/register', userInfo);
       return res.data;
@@ -27,5 +28,5 @@ export const useMutateUserRegister = (): UserRegisterResponse => {
       console.log('error message ', err);
     }
   });
-  return { mutate, isLoading, isError, error };
+  return { mutate, isLoading, isError, error, data };
 };
