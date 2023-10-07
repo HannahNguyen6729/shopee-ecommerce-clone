@@ -1,8 +1,14 @@
 import Product from '../../components/Product/Product';
 import AsideFilter from '../../components/AsideFilter/AsideFilter';
 import SortProductList from '../../components/SortProductList/SortProductList';
+import { useProducts } from '../../hooks/useProducts';
+import { useQueryParams } from '../../hooks/useQueryParams';
 
 const ProductList = () => {
+  const queryParams = useQueryParams();
+  const { data: products } = useProducts(queryParams);
+  console.log({ products });
+
   return (
     <div className='grid grid-cols-12 gap-6'>
       <div className='col-span-3'>
