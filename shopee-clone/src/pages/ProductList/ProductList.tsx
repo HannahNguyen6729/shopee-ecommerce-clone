@@ -1,3 +1,4 @@
+import Product from '../../components/Product/Product';
 import AsideFilter from '../../components/AsideFilter/AsideFilter';
 import SortProductList from '../../components/SortProductList/SortProductList';
 
@@ -10,9 +11,13 @@ const ProductList = () => {
       <div className='col-span-9'>
         <SortProductList />
         <div className='mt-6 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'>
-          <div className='col-span-1'>
-            <div>render Product detail</div>
-          </div>
+          {Array(30)
+            .fill(0)
+            .map((item, index) => (
+              <div key={index} className='col-span-1'>
+                <Product />
+              </div>
+            ))}
         </div>
         {/* TODO: Pagination */}
       </div>
