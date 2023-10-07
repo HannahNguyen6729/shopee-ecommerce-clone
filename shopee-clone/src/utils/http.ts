@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosInstance, HttpStatusCode } from 'axios';
 import { toast } from 'react-toastify';
-import { clearLocalStorage, getAccessTokenFromLS, setAccessTokenToLS } from './getTokenfromLS';
+import { clearLocalStorage, getAccessTokenFromLS, setAccessTokenToLS, setUserToLs } from './getTokenfromLS';
 import { AuthResponse } from 'src/types/auth.type';
 import { path } from '../constants/path';
 
@@ -20,6 +20,7 @@ http.interceptors.response.use(
       const access_token = (response.data as AuthResponse).data.access_token;
       if (access_token) {
         setAccessTokenToLS(access_token);
+        setUserToLs(response.data.data.user);
       }
     } else if (url === path.logout) {
       clearLocalStorage();

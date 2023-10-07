@@ -7,13 +7,14 @@ import { useMutation } from '@tanstack/react-query';
 import { path } from '../../constants/path';
 
 export default function Navbar() {
-  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+  const { isAuthenticated, setIsAuthenticated, profile, setProfile } = useContext(AuthContext);
   const { mutate: mutateUserLogout } = useMutation({
     mutationFn: async () => {
       await http.post(path.logout);
     },
     onSuccess: () => {
       setIsAuthenticated(false);
+      setProfile(null);
     }
   });
 
@@ -91,9 +92,9 @@ export default function Navbar() {
           }
         >
           <div className='mr-2 h-6 w-6 flex-shrink-0'>
-            <img src='...' alt='avatar' className='h-full w-full rounded-full object-cover' />
+            <img src={profile?.avatar} alt='avatar' className='h-full w-full rounded-full object-cover' />
           </div>
-          <div>email ....</div>
+          <div> {profile?.email} </div>
         </Popover>
       )}
       {!isAuthenticated && (
@@ -102,7 +103,7 @@ export default function Navbar() {
             Sign up
           </Link>
           <div className='h-4 border-r-[1px] border-r-white/40' />
-          <Link to={path.home} className='mx-3 capitalize  text-white hover:text-white/70'>
+          <Link to={path.login} className='mx-3 capitalize  text-white hover:text-white/70'>
             Login
           </Link>
         </div>

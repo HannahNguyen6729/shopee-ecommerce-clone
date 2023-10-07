@@ -24,7 +24,7 @@ const Login = () => {
   });
 
   const { mutate: mutateUser, error: mutateUserLoginError, data, isLoading } = useMutateUserLogin();
-  const { setIsAuthenticated } = useContext(AuthContext);
+  const { setIsAuthenticated, setProfile } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const onSubmitHandler: SubmitHandler<LoginFormValues> = (data) => {
@@ -48,10 +48,11 @@ const Login = () => {
 
     if (data?.data.user) {
       setIsAuthenticated(true);
+      setProfile(data?.data.user);
       navigate(path.home);
     }
-  }, [data?.data.user, mutateUserLoginError, navigate, setError, setIsAuthenticated]);
-  console.log({ isLoading });
+  }, [data?.data.user, mutateUserLoginError, navigate, setError, setIsAuthenticated, setProfile]);
+
   return (
     <div className='bg-orange'>
       <title>Login | Shopee Clone</title>
