@@ -25,7 +25,7 @@ const Register = () => {
 
   const { mutate: mutateUser, error: mutateUserRegisterError, data, isLoading } = useMutateUserRegister();
 
-  const { setIsAuthenticated } = useContext(AuthContext);
+  const { setIsAuthenticated, setProfile } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const onSubmitHandler: SubmitHandler<FormValues> = (data) => {
@@ -51,9 +51,10 @@ const Register = () => {
 
     if (data?.data.user) {
       setIsAuthenticated(true);
+      setProfile(data?.data.user);
       navigate(path.home);
     }
-  }, [data?.data.user, mutateUserRegisterError, navigate, setError, setIsAuthenticated]);
+  }, [data?.data.user, mutateUserRegisterError, navigate, setError, setIsAuthenticated, setProfile]);
 
   return (
     <div className='bg-orange'>
