@@ -20,6 +20,7 @@ export const useProducts = (queryParams: ProductListConfig): ProductsResponse =>
   const { data, error, isError, isLoading } = useQuery({
     queryKey: [PRODUCTS_QUERY_KEY, queryParams],
     queryFn: () => fetchProducts(queryParams),
+    keepPreviousData: true,
     onSuccess: (response) => {
       console.log('response', response);
     },
