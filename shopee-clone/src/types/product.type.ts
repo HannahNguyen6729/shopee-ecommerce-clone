@@ -27,11 +27,22 @@ export interface ProductList {
   };
 }
 
+export enum SortType {
+  createdAt = 'createdAt',
+  view = 'view',
+  sold = 'sold',
+  price = 'price'
+}
+
+export enum OrderType {
+  asc = 'asc',
+  desc = 'desc'
+}
 export interface ProductListConfig {
   page?: number | string;
   limit?: number | string;
-  sort_by?: 'createdAt' | 'view' | 'sold' | 'price';
-  order?: 'asc' | 'desc';
+  sort_by?: SortType;
+  order?: OrderType;
   exclude?: string;
   rating_filter?: number | string;
   price_max?: number | string;
