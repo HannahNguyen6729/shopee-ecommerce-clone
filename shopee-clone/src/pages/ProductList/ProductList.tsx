@@ -2,12 +2,13 @@ import Product from '../../components/Product/Product';
 import AsideFilter from '../../components/AsideFilter/AsideFilter';
 import SortProductList from '../../components/SortProductList/SortProductList';
 import { useProducts } from '../../hooks/useProducts';
-import { useQueryParams } from '../../hooks/useQueryParams';
+import Pagination from '../../components/Pagination/Pagination';
+import useQueryConfig from 'src/hooks/useQueryConfig';
+import { ProductListConfig } from 'src/types/product.type';
 
 const ProductList = () => {
-  const queryParams = useQueryParams();
-  const { data: productsData } = useProducts(queryParams);
-  console.log({ productsData });
+  const queryParams = useQueryConfig();
+  const { data: productsData } = useProducts(queryParams as ProductListConfig);
 
   return (
     <div className='container'>
@@ -25,7 +26,7 @@ const ProductList = () => {
                 </div>
               ))}
             </div>
-            {/* TODO: Pagination */}
+            <Pagination queryConfig={queryParams} pageSize={productsData.data.pagination.page_size} />
           </div>
         </div>
       )}
