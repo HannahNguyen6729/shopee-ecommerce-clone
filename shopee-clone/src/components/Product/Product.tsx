@@ -31,7 +31,7 @@ const Product = ({ product }: ProductProps) => {
             <ProductRating rating={rating} />
 
             <div className='ml-2 text-sm'>
-              <span> {formatNumberToSocialStyle(sold)}k</span>
+              <span> {formatNumberToSocialStyle(sold)}</span>
               <span className='ml-1'> Sold </span>
             </div>
           </div>

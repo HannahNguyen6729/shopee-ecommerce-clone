@@ -12,6 +12,7 @@ import { NoUndefinedField } from '../../types/util.type';
 import { InputSchema, inputSchema } from '../../utils/inputSchema';
 import { omit } from 'lodash';
 import RatingStars from '../RatingStars/RatingStars';
+import { renderCategories } from 'src/utils/helper';
 
 type Props = {
   queryConfig: QueryConfig;
@@ -104,7 +105,7 @@ const AsideFilter = ({ queryConfig, categories }: Props) => {
                     <polygon points='4 3.5 0 0 0 7' />
                   </svg>
                 )}
-                {item.name}
+                {renderCategories(item.name)}
               </Link>
             </li>
           );

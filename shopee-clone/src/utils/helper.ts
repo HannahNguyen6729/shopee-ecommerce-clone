@@ -24,3 +24,14 @@ const removeSpecialCharacter = (str: string) =>
 export const generateNameId = ({ name, id }: { name: string; id: string }) => {
   return removeSpecialCharacter(name).replace(/\s/g, '-') + `-i-${id}`;
 };
+
+export function renderCategories(name: string) {
+  if (name == 'Đồng hồ') {
+    return 'Watch';
+  } else if (name == 'Áo thun') {
+    return 'Shirt';
+  } else if (name == 'Điện thoại') {
+    return 'Mobile Phone';
+  }
+  return name;
+}
