@@ -12,6 +12,8 @@ import { path } from '../../constants/path';
 import Button from 'src/components/button/Button';
 import Input from 'src/components/Input/Input';
 
+const registerSchema = inputSchema.pick(['email', 'password', 'confirm_password']);
+
 const Register = () => {
   const {
     register,
@@ -20,7 +22,7 @@ const Register = () => {
     // reset,
     setError
   } = useForm<FormValues>({
-    resolver: yupResolver(inputSchema)
+    resolver: yupResolver(registerSchema)
   });
 
   const { mutate: mutateUser, error: mutateUserRegisterError, data, isLoading } = useMutateUserRegister();

@@ -11,6 +11,14 @@ export type LoginFormValues = Omit<FormValues, 'confirm_password'>;
 const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 // min 8 characters, 1 upper case letter, 1 lower case letter, 1 numeric digit.
 
+function testPriceMinMax(this: yup.TestContext<yup.AnyObject>) {
+  const { price_max, price_min } = this.parent as { price_min: string; price_max: string };
+  if (price_min !== '' && price_max !== '') {
+    return Number(price_max) >= Number(price_min);
+  }
+  return price_min !== '' || price_max !== '';
+}
+
 export const inputSchema = yup
   .object()
   .shape({
@@ -26,7 +34,18 @@ export const inputSchema = yup
       .min(8)
       .max(32)
       .required('Required')
-      .oneOf([yup.ref('password')], 'Passwords must match')
+      .oneOf([yup.ref('password')], 'Passwords must match'),
+    price_min: yup.string().test({
+      name: 'price-not-allowed',
+      message: 'Invalid price',
+      test: testPriceMinMax
+    }),
+    price_max: yup.string().test({
+      name: 'price-not-allowed',
+      message: 'value',
+      test: testPriceMinMax
+    }),
+    name: yup.string().trim().required('Product name is required!')
   })
   .required();
 
@@ -42,3 +61,5 @@ export const loginInputSchema = yup
       .matches(passwordRules, 'At least 1 uppercase letter, 1 lowercase letter, 1 number')
   })
   .required();
+
+export type InputSchema = yup.InferType<typeof inputSchema>;
