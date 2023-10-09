@@ -20,7 +20,7 @@ export default function Cart() {
 
   const location = useLocation();
   const choosenPurchaseIdFromLocation = (location.state as { purchaseId: string } | null)?.purchaseId;
-  const purchasesInCart = purchasesInCartData?.data.data;
+  const purchasesInCart = purchasesInCartData?.data;
   const isAllChecked = useMemo(() => extendedPurchases.every((purchase) => purchase.checked), [extendedPurchases]);
   const checkedPurchases = useMemo(() => extendedPurchases.filter((purchase) => purchase.checked), [extendedPurchases]);
   const checkedPurchasesCount = checkedPurchases.length;
@@ -139,15 +139,15 @@ export default function Cart() {
                           onChange={handleCheckAll}
                         />
                       </div>
-                      <div className='flex-grow text-black'>Sản phẩm</div>
+                      <div className='flex-grow text-black'>Product</div>
                     </div>
                   </div>
                   <div className='col-span-6'>
                     <div className='grid grid-cols-5 text-center'>
-                      <div className='col-span-2'>Đơn giá</div>
-                      <div className='col-span-1'>Số lượng</div>
-                      <div className='col-span-1'>Số tiền</div>
-                      <div className='col-span-1'>Thao tác</div>
+                      <div className='col-span-2'> Unit Price</div>
+                      <div className='col-span-1'> Quantity</div>
+                      <div className='col-span-1'> Total Price</div>
+                      <div className='col-span-1'> Actions</div>
                     </div>
                   </div>
                 </div>
@@ -199,7 +199,7 @@ export default function Cart() {
                             <div className='col-span-2'>
                               <div className='flex items-center justify-center'>
                                 <span className='text-gray-300 line-through'>
-                                  ₫{formatCurrency(purchase.product.price_before_discount)}
+                                  ${formatCurrency(purchase.product.price_before_discount)}
                                 </span>
                                 <span className='ml-3'>₫{formatCurrency(purchase.product.price)}</span>
                               </div>
@@ -226,7 +226,7 @@ export default function Cart() {
                             </div>
                             <div className='col-span-1'>
                               <span className='text-orange'>
-                                ₫{formatCurrency(purchase.product.price * purchase.buy_count)}
+                                ${formatCurrency(purchase.product.price * purchase.buy_count)}
                               </span>
                             </div>
                             <div className='col-span-1'>
@@ -234,7 +234,7 @@ export default function Cart() {
                                 onClick={handleDelete(index)}
                                 className='bg-none text-black transition-colors hover:text-orange'
                               >
-                                Xóa
+                                Delete
                               </button>
                             </div>
                           </div>
@@ -256,22 +256,22 @@ export default function Cart() {
                   />
                 </div>
                 <button className='mx-3 border-none bg-none' onClick={handleCheckAll}>
-                  Chọn tất cả ({extendedPurchases.length})
+                  Select All ({extendedPurchases.length})
                 </button>
                 <button className='mx-3 border-none bg-none' onClick={handleDeleteManyPurchases}>
-                  Xóa
+                  Delete
                 </button>
               </div>
 
               <div className='mt-5 flex flex-col sm:ml-auto sm:mt-0 sm:flex-row sm:items-center'>
                 <div>
                   <div className='flex items-center sm:justify-end'>
-                    <div>Tổng thanh toán ({checkedPurchasesCount} sản phẩm):</div>
-                    <div className='ml-2 text-2xl text-orange'>₫{formatCurrency(totalCheckedPurchasePrice)}</div>
+                    <div>Total ({checkedPurchasesCount} items):</div>
+                    <div className='ml-2 text-2xl text-orange'>${formatCurrency(totalCheckedPurchasePrice)}</div>
                   </div>
                   <div className='flex items-center text-sm sm:justify-end'>
-                    <div className='text-gray-500'>Tiết kiệm</div>
-                    <div className='ml-6 text-orange'>₫{formatCurrency(totalCheckedPurchaseSavingPrice)}</div>
+                    <div className='text-gray-500'>Save</div>
+                    <div className='ml-6 text-orange'>${formatCurrency(totalCheckedPurchaseSavingPrice)}</div>
                   </div>
                 </div>
                 <Button
@@ -279,7 +279,7 @@ export default function Cart() {
                   onClick={handleBuyPurchases}
                   disabled={isLoading}
                 >
-                  Mua hàng
+                  Check out
                 </Button>
               </div>
             </div>
@@ -287,13 +287,13 @@ export default function Cart() {
         ) : (
           <div className='text-center'>
             <img src={noproduct} alt='no purchase' className='mx-auto h-24 w-24' />
-            <div className='mt-5 font-bold text-gray-400'>Giỏ hàng của bạn còn trống</div>
+            <div className='mt-5 font-bold text-gray-400'>Your shopping cart is empty</div>
             <div className='mt-5 text-center'>
               <Link
                 to={path.home}
                 className=' rounded-sm bg-orange px-10 py-2  uppercase text-white transition-all hover:bg-orange/80'
               >
-                Mua ngay
+                Go Shopping Now
               </Link>
             </div>
           </div>
