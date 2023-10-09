@@ -5,17 +5,19 @@ import { useProducts } from '../../hooks/useProducts';
 import Pagination from '../../components/Pagination/Pagination';
 import useQueryConfig from 'src/hooks/useQueryConfig';
 import { ProductListConfig } from 'src/types/product.type';
+import { useCategories } from 'src/hooks/useCategories';
 
 const ProductList = () => {
   const queryParams = useQueryConfig();
   const { data: productsData } = useProducts(queryParams as ProductListConfig);
+  const { data: categoriesData } = useCategories();
 
   return (
     <div className='container'>
       {productsData && (
         <div className='grid grid-cols-12 gap-6'>
           <div className='col-span-3'>
-            <AsideFilter />
+            <AsideFilter queryConfig={queryParams} categories={categoriesData?.data || []} />
           </div>
           <div className='col-span-9'>
             <SortProductList queryConfig={queryParams} pageSize={productsData.data.pagination.page_size} />

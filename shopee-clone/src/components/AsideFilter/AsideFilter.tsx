@@ -1,12 +1,26 @@
-import { Link } from 'react-router-dom';
+import { Link, createSearchParams } from 'react-router-dom';
 import { path } from '../../constants/path';
 import Button from '../button/Button';
+import { Category } from 'src/types/category.type';
+import { QueryConfig } from 'src/hooks/useQueryConfig';
+import classNames from 'classnames';
 
-const AsideFilter = () => {
+type Props = {
+  queryConfig: QueryConfig;
+  categories: Category[];
+};
+
+const AsideFilter = ({ queryConfig, categories }: Props) => {
   const handleRemoveAll = () => {};
+
   return (
     <div className='py-4'>
-      <Link to={path.home}>
+      <Link
+        to={path.home}
+        className={classNames('flex items-center font-bold uppercase', {
+          'text-orange': !queryConfig.category
+        })}
+      >
         <svg viewBox='0 0 12 10' className='mr-3 h-4 w-3 fill-current'>
           <g fillRule='evenodd' stroke='none' strokeWidth={1}>
             <g transform='translate(-373 -208)'>
@@ -24,19 +38,34 @@ const AsideFilter = () => {
       </Link>
       <div className='my-4 h-[1px] bg-gray-300' />
       <ul>
-        <li className='py-2 pl-2'>
-          <Link
-            to={{
-              pathname: path.home
-            }}
-          >
-            <svg viewBox='0 0 4 7' className='absolute top-1 left-[-10px] h-2 w-2 fill-orange'>
-              <polygon points='4 3.5 0 0 0 7' />
-            </svg>
-            male fashion
-          </Link>
-        </li>
+        {categories.map((item) => {
+          const isActive = queryConfig.category === item._id;
+          return (
+            <li key={item._id} className='py-2 pl-2'>
+              <Link
+                to={{
+                  pathname: path.home,
+                  search: createSearchParams({
+                    ...queryConfig,
+                    category: item._id
+                  }).toString()
+                }}
+                className={classNames('relative px-2', {
+                  'font-semibold text-orange': isActive
+                })}
+              >
+                {isActive && (
+                  <svg viewBox='0 0 4 7' className='absolute top-1 left-[-10px] h-2 w-2 fill-orange'>
+                    <polygon points='4 3.5 0 0 0 7' />
+                  </svg>
+                )}
+                {item.name}
+              </Link>
+            </li>
+          );
+        })}
       </ul>
+
       <Link to={path.home} className='mt-4 flex items-center font-bold uppercase'>
         <svg
           enableBackground='new 0 0 15 15'
