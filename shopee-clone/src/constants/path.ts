@@ -10,3 +10,5 @@ export const path = {
   productDetail: ':nameId',
   cart: '/cart'
 } as const;
+
+export const purchaseUrl = 'purchases';

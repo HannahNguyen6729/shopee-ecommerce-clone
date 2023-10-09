@@ -8,6 +8,7 @@ import Profile from './pages/Profile/Profile';
 import { useContext } from 'react';
 import { AuthContext } from './context/authContext';
 import { path } from './constants/path';
+import ProductDetail from './pages/ProductDetail/ProductDetail';
 
 const ProtectedRoute = () => {
   const { isAuthenticated } = useContext(AuthContext);
@@ -64,6 +65,15 @@ const useRouteElements = () => {
           )
         }
       ]
+    },
+    {
+      path: path.productDetail,
+      index: true,
+      element: (
+        <MainLayout>
+          <ProductDetail />
+        </MainLayout>
+      )
     }
   ]);
 
