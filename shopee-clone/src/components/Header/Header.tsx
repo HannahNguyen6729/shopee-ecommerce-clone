@@ -10,6 +10,7 @@ import noproduct from '../../assets/images/no-product.png';
 import { usePurchases } from 'src/hooks/usePurchases';
 
 const MAX_PURCHASES = 5;
+
 export default function Header() {
   const { isAuthenticated } = useContext(AuthContext);
   const { onSubmitSearch, register } = useSearchProduct();
@@ -17,7 +18,7 @@ export default function Header() {
   const { data: purchasesInCartData } = usePurchases();
 
   const purchasesInCart = purchasesInCartData?.data;
-  console.log({ purchasesInCart });
+
   return (
     <div className='bg-[linear-gradient(-180deg,#f53d2d,#f63)] pb-5 pt-2 text-white'>
       <div className='container'>
