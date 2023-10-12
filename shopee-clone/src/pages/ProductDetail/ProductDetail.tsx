@@ -87,7 +87,7 @@ export default function ProductDetail() {
 
   const buyNow = async () => {
     await mutateAsync({ buy_count: buyCount, product_id: product?._id as string });
-    console.log(cartData);
+
     navigate(path.cart, {
       state: {
         purchaseId: cartData._id

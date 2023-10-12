@@ -16,7 +16,6 @@ export default function Header() {
   const { onSubmitSearch, register } = useSearchProduct();
 
   const { data: purchasesInCartData } = usePurchases();
-
   const purchasesInCart = purchasesInCartData?.data;
 
   return (
@@ -58,7 +57,7 @@ export default function Header() {
             </div>
           </form>
           <div className='col-span-1 justify-self-end'>
-            <Link to='/cart'>
+            <div>
               <Popover
                 renderPopover={
                   <div className='relative  max-w-[400px] rounded-sm border border-gray-200 bg-white text-sm shadow-md'>
@@ -110,7 +109,7 @@ export default function Header() {
                   </div>
                 }
               >
-                <Link to='/' className='relative'>
+                <Link to={path.cart} className='relative'>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
                     fill='none'
@@ -132,7 +131,7 @@ export default function Header() {
                   )}
                 </Link>
               </Popover>
-            </Link>
+            </div>
           </div>
         </div>
       </div>
