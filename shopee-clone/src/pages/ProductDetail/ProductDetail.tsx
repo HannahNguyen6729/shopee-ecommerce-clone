@@ -12,7 +12,7 @@ import { useMutateCart } from 'src/hooks/useMutateCart';
 import { path } from 'src/constants/path';
 
 export default function ProductDetail() {
-  const [buyCount, setBuyCount] = useState(1);
+  const [purchaseCount, setPurchaseCount] = useState(1);
   const { nameId } = useParams();
 
   const id = getIdFromNameId(nameId as string);
@@ -79,16 +79,16 @@ export default function ProductDetail() {
     imageRef.current?.removeAttribute('style');
   };
 
-  const handleBuyCount = (value: number) => {
-    setBuyCount(value);
+  const handlePurchaseCount = (value: number) => {
+    setPurchaseCount(value);
   };
 
   const addToCart = () => {
-    mutateCart({ buy_count: buyCount, product_id: product?._id as string });
+    mutateCart({ buy_count: purchaseCount, product_id: product?._id as string });
   };
 
   const buyNow = async () => {
-    await mutateAsync({ buy_count: buyCount, product_id: product?._id as string });
+    await mutateAsync({ buy_count: purchaseCount, product_id: product?._id as string });
 
     navigate(path.cart, {
       state: {
@@ -190,10 +190,10 @@ export default function ProductDetail() {
               <div className='mt-8 flex items-center'>
                 <div className='capitalize text-gray-500'> Quantity </div>
                 <QuantityController
-                  onDecrease={handleBuyCount}
-                  onIncrease={handleBuyCount}
-                  onType={handleBuyCount}
-                  value={buyCount}
+                  onDecrease={handlePurchaseCount}
+                  onIncrease={handlePurchaseCount}
+                  onType={handlePurchaseCount}
+                  value={purchaseCount}
                   max={product.quantity}
                 />
                 <div className='ml-6 text-sm text-gray-500'>{product.quantity} pieces available</div>
