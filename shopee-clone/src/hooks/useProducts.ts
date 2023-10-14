@@ -21,6 +21,7 @@ export const useProducts = (queryParams: ProductListConfig): ProductsResponse =>
     queryKey: [PRODUCTS_QUERY_KEY, queryParams],
     queryFn: () => fetchProducts(queryParams),
     keepPreviousData: true,
+    staleTime: 3 * 60 * 1000,
     onSuccess: (response) => {
       console.log('response', response);
     },

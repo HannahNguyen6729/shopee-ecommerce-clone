@@ -23,6 +23,7 @@ export default function ProductDetail() {
   const [activeImage, setActiveImage] = useState('');
   const product = productDetailData?.data;
   const imageRef = useRef<HTMLImageElement>(null);
+
   const currentImages = useMemo(
     () => (product ? product.images.slice(...currentIndexImages) : []),
     [product, currentIndexImages]
@@ -57,6 +58,7 @@ export default function ProductDetail() {
   };
 
   const handleZoom = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    //The getBoundingClientRect() method returns a DOMRect object (div element) with eight properties: left, top, right, bottom, x, y, width, height
     const rect = event.currentTarget.getBoundingClientRect();
     const image = imageRef.current as HTMLImageElement;
     const { naturalHeight, naturalWidth } = image;
