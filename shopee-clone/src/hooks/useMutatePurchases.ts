@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import { purchaseUrl } from 'src/constants/path';
+import { purchasesStatus } from 'src/constants/purchase';
 import { PURCHASES_QUERY_KEY } from 'src/constants/queryKey';
 import { http } from 'src/utils/http';
 
@@ -46,7 +47,7 @@ export const useMutatePurchases = () => {
     },
     onSettled: () => {
       //invalidateQueries: invalidate queries and refetch requests to renew data
-      queryClient.invalidateQueries([PURCHASES_QUERY_KEY]);
+      queryClient.invalidateQueries([PURCHASES_QUERY_KEY, { status: purchasesStatus.inCart }]);
     },
     onSuccess: (response) => {
       toast.success(response.message, { position: 'top-center', autoClose: 1000 });

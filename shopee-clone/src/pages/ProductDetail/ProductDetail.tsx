@@ -33,7 +33,7 @@ export default function ProductDetail() {
   const { data: productsData } = useProducts(queryConfig);
   const navigate = useNavigate();
 
-  const { mutate: mutateCart, data: cartData, mutateAsync } = useMutateCart();
+  const { mutate: mutateCart, mutateAsync } = useMutateCart();
 
   useEffect(() => {
     if (product && product.images.length > 0) {
@@ -88,11 +88,11 @@ export default function ProductDetail() {
   };
 
   const buyNow = async () => {
-    await mutateAsync({ buy_count: purchaseCount, product_id: product?._id as string });
+    const purchase = await mutateAsync({ buy_count: purchaseCount, product_id: product?._id as string });
 
     navigate(path.cart, {
       state: {
-        purchaseId: cartData._id
+        purchaseId: purchase.data._id
       }
     });
   };

@@ -21,6 +21,7 @@ export default function Cart() {
   const location = useLocation();
   const choosenPurchaseIdFromLocation = (location.state as { purchaseId: string } | null)?.purchaseId;
   const purchasesInCart = purchasesInCartData?.data;
+
   const isAllChecked = useMemo(() => extendedPurchases.every((purchase) => purchase.checked), [extendedPurchases]);
   const checkedPurchases = useMemo(() => extendedPurchases.filter((purchase) => purchase.checked), [extendedPurchases]);
   const checkedPurchasesCount = checkedPurchases.length;
