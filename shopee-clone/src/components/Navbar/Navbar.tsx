@@ -3,12 +3,15 @@ import Popover from '../Popover/Popover';
 import { useContext } from 'react';
 import { AuthContext } from 'src/context/authContext';
 import { http } from 'src/utils/http';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { path } from '../../constants/path';
 import avatar from '../../assets/avatar.png';
+import { PURCHASES_QUERY_KEY } from 'src/constants/queryKey';
 
 export default function Navbar() {
   const { isAuthenticated, setIsAuthenticated, profile, setProfile } = useContext(AuthContext);
+  const queryClient = useQueryClient();
+
   const { mutate: mutateUserLogout } = useMutation({
     mutationFn: async () => {
       await http.post(path.logout);
@@ -16,6 +19,10 @@ export default function Navbar() {
     onSuccess: () => {
       setIsAuthenticated(false);
       setProfile(null);
+    },
+    onSettled: () => {
+      // remove queries from the cache based on query key
+      queryClient.removeQueries({ queryKey: [PURCHASES_QUERY_KEY] });
     }
   });
 
