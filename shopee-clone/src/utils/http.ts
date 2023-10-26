@@ -45,6 +45,10 @@ http.interceptors.response.use(
       });
     }
 
+    if (error.response?.status === HttpStatusCode.Unauthorized) {
+      clearLocalStorage();
+    }
+
     return Promise.reject(error);
   }
 );
