@@ -259,7 +259,7 @@ export default function Cart() {
                 <button className='mx-3 border-none bg-none' onClick={handleCheckAll}>
                   Select All ({extendedPurchases.length})
                 </button>
-                <button className='mx-3 border-none bg-none' onClick={handleDeleteManyPurchases}>
+                <button className='mx-3 border-none bg-none hover:text-orange' onClick={handleDeleteManyPurchases}>
                   Delete
                 </button>
               </div>
