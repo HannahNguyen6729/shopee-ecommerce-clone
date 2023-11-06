@@ -1,0 +1,13 @@
+####
+GET http://localhost:4000/categories
+
+Content-Type: application/json
+
+### register
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "jimmy",
+  "password": "anna"
+}
