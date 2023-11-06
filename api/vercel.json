@@ -12,11 +12,12 @@
       "dest": "index.js"
     },
     {
-      "src": ["/admin/(.*)", "/(.*)"],
-      "dest": [
-        "/src/routes/admin/index.route.js",
-        "/src/routes/common/index.route.js"
-      ]
+      "src": "/admin/(.*)",
+      "dest": "/src/routes/admin/index.route.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/src/routes/common/index.route.js"
     }
   ]
 }
