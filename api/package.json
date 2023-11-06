@@ -10,8 +10,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "ts-node index.ts",
-    "dev": "nodemon --require dotenv/config --exec ts-node index.ts",
-    "build": "tsc"
+    "dev": "nodemon --require dotenv/config --exec ts-node index.ts"
   },
   "dependencies": {
     "chalk": "^4.1.2",
