@@ -4,7 +4,7 @@ import { adminProductRouter } from './admin-product.route';
 import { adminUserRouter } from './admin-user.route';
 
 export const adminRoutes = {
-  prefix: '/admin/',
+  prefix: '/api/admin/',
   routes: [
     {
       path: 'users',
