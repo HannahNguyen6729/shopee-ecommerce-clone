@@ -2,12 +2,12 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import chalk from 'chalk';
-import { connectDatabase } from './database/database';
-import { commonRoutes } from './routes/common/index.route';
-import { adminRoutes } from './routes/admin/index.route';
-import { isProduction } from './utils/helper';
+import { connectDatabase } from './src/database/database';
+import { commonRoutes } from './src/routes/common/index.route';
+import { adminRoutes } from './src/routes/admin/index.route';
+import { isProduction } from './src/utils/helper';
 import path from 'path';
-import { FOLDERS, FOLDER_UPLOAD, ROUTE_IMAGE } from './constants/config';
+import { FOLDERS, FOLDER_UPLOAD, ROUTE_IMAGE } from './src/constants/config';
 
 require('dotenv').config();
 

@@ -6,10 +6,9 @@
   "license": "MIT",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "--require dotenv/config --exec ts-node src/app.ts",
-    "dev": "nodemon --require dotenv/config --exec ts-node src/app.ts",
-    "build": "tsc --project ./",
-    "prod": "tsc --project ./ && node ./build/index.js production"
+    "start": "--require dotenv/config --exec ts-node index.ts",
+    "dev": "nodemon --require dotenv/config --exec ts-node index.ts",
+    "build": "tsc"
   },
   "dependencies": {
     "chalk": "^4.1.2",
