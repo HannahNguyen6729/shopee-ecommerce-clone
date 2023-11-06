@@ -13,4 +13,4 @@ export const path = {
 
 export const purchaseUrl = 'purchases';
 
-export const API_URL = process.env.REACT_APP_API_URL || 'https://api-ecom.duthanhduoc.com/';
+export const API_URL = 'http://localhost:4000';
