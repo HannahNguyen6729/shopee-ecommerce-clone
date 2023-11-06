@@ -5,7 +5,7 @@ import { commonAuthRouter } from './common-auth.route';
 import { purchaseRouter } from './purchase.route';
 
 export const commonRoutes = {
-  prefix: '/api/',
+  prefix: '/',
   routes: [
     {
       path: '',
