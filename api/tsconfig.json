@@ -2,13 +2,19 @@
   "compilerOptions": {
     "target": "es2019",
     "module": "commonjs",
+    "moduleResolution": "node",
     "outDir": "build",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true
   },
-  "include": ["src/**/*.ts", "src/types/express.d.ts", "index.ts"],
+  "include": [
+    "src/**/*.ts",
+    "src/types/express.d.ts",
+    "index.ts",
+    "./src/**/*"
+  ],
   "exclude": ["node_modules"],
   "files": ["src/types/express.d.ts"]
 }
