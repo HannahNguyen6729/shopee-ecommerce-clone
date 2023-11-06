@@ -202,7 +202,7 @@ export default function Cart() {
                                 <span className='text-gray-300 line-through'>
                                   ${formatCurrency(purchase.product.price_before_discount)}
                                 </span>
-                                <span className='ml-3'>₫{formatCurrency(purchase.product.price)}</span>
+                                <span className='ml-3'>${formatCurrency(purchase.product.price)}</span>
                               </div>
                             </div>
                             <div className='col-span-1'>
