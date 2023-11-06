@@ -4,6 +4,9 @@
   "main": "index.ts",
   "author": "Hanh Nguyen",
   "license": "MIT",
+  "engines": {
+    "node": "18.x"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "ts-node index.ts",
