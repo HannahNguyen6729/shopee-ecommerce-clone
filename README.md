@@ -63,3 +63,6 @@ Shopee-clone has a backend repository (mongodb, express, mongoose, jwt): [api-sh
   - CRUD
 
 ## Screenshots
+![Screenshot 2023-11-07 at 23-10-44 Shopee Hot Deals Best Prices](https://github.com/HannahNguyen6729/shopee-clone/assets/81440768/f93c976e-d0a6-41df-9478-59bce9713855)
+![Screenshot 2023-11-07 at 23-11-25 Shopee Hot Deals Best Prices](https://github.com/HannahNguyen6729/shopee-clone/assets/81440768/14035645-dc92-4b6c-bb41-0bc982e832bc)
+![Screenshot 2023-11-07 at 23-13-11 Shopee Hot Deals Best Prices](https://github.com/HannahNguyen6729/shopee-clone/assets/81440768/6b4da0b1-6e7c-4711-8fc0-f5e58cdf51b9)
