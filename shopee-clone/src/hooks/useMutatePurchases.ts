@@ -50,7 +50,8 @@ export const useMutatePurchases = () => {
       queryClient.invalidateQueries([PURCHASES_QUERY_KEY, { status: purchasesStatus.inCart }]);
     },
     onSuccess: (response) => {
-      toast.success(response.message, { position: 'top-center', autoClose: 1000 });
+      const msg = response.filter((item) => item !== undefined);
+      toast.success(msg[0].message, { position: 'top-center', autoClose: 1000 });
       console.log('response', response);
     },
     onError: (err) => {
