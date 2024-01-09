@@ -13,4 +13,6 @@ export const path = {
 
 export const purchaseUrl = 'purchases';
 
-export const API_URL = 'https://api-shopee.onrender.com/';
+//export const API_URL = 'https://api-shopee.onrender.com/' || 'https://api-ecom.duthanhduoc.com/';
+
+export const API_URL = 'https://api-ecom.duthanhduoc.com/';
