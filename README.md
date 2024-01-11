@@ -4,7 +4,7 @@
 </p>
 <br />
 <p align="center">
-    <a href="https://shopee-clone-coral-nine.vercel.app/">View website</a> 
+    <a href="https://ecommerce-clone-xfwr.onrender.com/">View website</a> 
     </p>
  <br />
 
