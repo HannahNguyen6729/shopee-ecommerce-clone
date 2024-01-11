@@ -23,7 +23,7 @@ const ProductList = () => {
           <div className='flex flex-col  items-center grow basis-2/3 w-screen '>
             <ImageCarousel />
           </div>
-          <div className='flex flex-col  items-center grow-0 basis-1/3  w-screen gap-1 pl-1'>
+          <div className='flex flex-col  items-center grow-0 basis-1/3  w-screen gap-0.5 pl-1'>
             <img src={img3} alt='slider 3' className='rounded' />
             <img src={img4} alt='slider 4' className='rounded' />
           </div>
